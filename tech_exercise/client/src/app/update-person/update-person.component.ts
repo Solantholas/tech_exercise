@@ -94,7 +94,7 @@ export class UpdatePersonComponent {
       await this.updatePerson(person);
       await this.updateAstronautDuties(person);
 
-      this.router.navigate(['/']);
+      this.goBack();
     }
   }
 

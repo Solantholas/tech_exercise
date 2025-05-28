@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using StargateAPI.Business.Data;
 using StargateAPI.Business.Dtos;
@@ -26,7 +27,7 @@ namespace StargateAPI.Business.Queries
 
         public async Task<GetPersonByNameResult> Handle(GetPersonByName request, CancellationToken cancellationToken)
         {
-            var result = new GetPersonByNameResult();
+            GetPersonByNameResult result = new GetPersonByNameResult();
 
             if (request == null || string.IsNullOrWhiteSpace(request.Name))
             {
@@ -44,13 +45,18 @@ namespace StargateAPI.Business.Queries
                     throw new InvalidOperationException("Relational database connection is required.");
                 }
 
-                var query = @"SELECT a.Id as PersonId, a.Name, b.CurrentRank, b.CurrentDutyTitle, b.CareerStartDate, b.CareerEndDate 
-                              FROM [Person] a 
-                              LEFT JOIN [AstronautDetail] b on b.PersonId = a.Id 
-                              WHERE a.Name = @Name";
-
-                var person = await _context.Connection.QueryAsync<PersonAstronaut>(query, new { Name = request.Name });
-                var personResult = person.FirstOrDefault();
+                PersonAstronaut? personResult = await _context.People
+                    .Where(p => p.Name == request.Name)
+                    .Select(p => new PersonAstronaut
+                    {
+                        PersonId = p.Id,
+                        Name = p.Name,
+                        CurrentRank = p.AstronautDetail != null ? p.AstronautDetail.CurrentRank : null,
+                        CurrentDutyTitle = p.AstronautDetail != null ? p.AstronautDetail.CurrentDutyTitle : null,
+                        CareerStartDate = p.AstronautDetail != null ? p.AstronautDetail.CareerStartDate : null,
+                        CareerEndDate = p.AstronautDetail != null ? p.AstronautDetail.CareerEndDate : null
+                    })
+                    .FirstOrDefaultAsync(cancellationToken);
 
                 result.Person = personResult;
 

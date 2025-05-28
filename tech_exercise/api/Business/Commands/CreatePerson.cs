@@ -32,7 +32,7 @@ namespace StargateAPI.Business.Commands
                 throw new BadHttpRequestException("Name must be provided.");
             }
 
-            var person = _context.People.AsNoTracking().FirstOrDefault(z => z.Name == request.Name);
+            Person? person = _context.People.AsNoTracking().FirstOrDefault(z => z.Name == request.Name);
 
             if (person is not null)
             {
@@ -57,7 +57,7 @@ namespace StargateAPI.Business.Commands
 
         public async Task<CreatePersonResult> Handle(CreatePerson request, CancellationToken cancellationToken)
         {
-            var result = new CreatePersonResult();
+            CreatePersonResult result = new CreatePersonResult();
 
             try
             {
@@ -70,7 +70,7 @@ namespace StargateAPI.Business.Commands
                     return result;
                 }
 
-                var newPerson = new Person()
+                Person newPerson = new Person()
                 {
                     Name = request.Name
                 };

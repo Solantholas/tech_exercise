@@ -27,7 +27,7 @@ namespace StargateAPI.Business.Commands
 
         public async Task<UpdatePersonResult> Handle(UpdatePerson request, CancellationToken cancellationToken)
         {
-            var result = new UpdatePersonResult();
+            UpdatePersonResult result = new UpdatePersonResult();
 
             try
             {
@@ -39,7 +39,7 @@ namespace StargateAPI.Business.Commands
                     return result;
                 }
 
-                var person = await _context.People.FirstOrDefaultAsync(p => p.Name == request.Name, cancellationToken);
+                Person? person = await _context.People.FirstOrDefaultAsync(p => p.Name == request.Name, cancellationToken);
 
                 if (person == null)
                 {

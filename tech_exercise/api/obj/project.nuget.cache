@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Ym+uxAXS39o=",
+  "dgSpecHash": "aI72lXMTjQk=",
   "success": true,
-  "projectFilePath": "/Users/coreyhicks/IdeaProjects/tech_review/tech_exercise/api/StargateAPI.csproj",
+  "projectFilePath": "/Users/coreyhicks/IdeaProjects/tech_exercise/tech_exercise/api/StargateAPI.csproj",
   "expectedPackageFiles": [
     "/Users/coreyhicks/.nuget/packages/castle.core/5.1.1/castle.core.5.1.1.nupkg.sha512",
     "/Users/coreyhicks/.nuget/packages/dapper/2.1.66/dapper.2.1.66.nupkg.sha512",

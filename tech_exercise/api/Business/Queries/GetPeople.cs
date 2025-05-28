@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using StargateAPI.Business.Data;
 using StargateAPI.Business.Dtos;
@@ -24,7 +25,7 @@ namespace StargateAPI.Business.Queries
 
         public async Task<GetPeopleResult> Handle(GetPeople request, CancellationToken cancellationToken)
         {
-            var result = new GetPeopleResult();
+            GetPeopleResult result = new GetPeopleResult();
 
             try
             {
@@ -33,11 +34,17 @@ namespace StargateAPI.Business.Queries
                     throw new InvalidOperationException("Relational database connection is required.");
                 }
 
-                var query = @"SELECT a.Id as PersonId, a.Name, b.CurrentRank, b.CurrentDutyTitle, b.CareerStartDate, b.CareerEndDate 
-                              FROM [Person] a 
-                              LEFT JOIN [AstronautDetail] b on b.PersonId = a.Id";
-                var people = await _context.Connection.QueryAsync<PersonAstronaut>(query);
-                var peopleList = people?.ToList() ?? new List<PersonAstronaut>();
+                List<PersonAstronaut>? peopleList = await _context.People
+                    .Select(p => new PersonAstronaut
+                    {
+                        PersonId = p.Id,
+                        Name = p.Name,
+                        CurrentRank = p.AstronautDetail != null ? p.AstronautDetail.CurrentRank : null,
+                        CurrentDutyTitle = p.AstronautDetail != null ? p.AstronautDetail.CurrentDutyTitle : null,
+                        CareerStartDate = p.AstronautDetail != null ? p.AstronautDetail.CareerStartDate : null,
+                        CareerEndDate = p.AstronautDetail != null ? p.AstronautDetail.CareerEndDate : null
+                    })
+                    .ToListAsync(cancellationToken);
 
                 result.People = peopleList;
 

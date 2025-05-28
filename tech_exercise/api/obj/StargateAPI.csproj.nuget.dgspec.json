@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/coreyhicks/IdeaProjects/tech_review/tech_exercise/api/StargateAPI.csproj": {}
+    "/Users/coreyhicks/IdeaProjects/tech_exercise/tech_exercise/api/StargateAPI.csproj": {}
   },
   "projects": {
-    "/Users/coreyhicks/IdeaProjects/tech_review/tech_exercise/api/StargateAPI.csproj": {
+    "/Users/coreyhicks/IdeaProjects/tech_exercise/tech_exercise/api/StargateAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/coreyhicks/IdeaProjects/tech_review/tech_exercise/api/StargateAPI.csproj",
+        "projectUniqueName": "/Users/coreyhicks/IdeaProjects/tech_exercise/tech_exercise/api/StargateAPI.csproj",
         "projectName": "StargateAPI",
-        "projectPath": "/Users/coreyhicks/IdeaProjects/tech_review/tech_exercise/api/StargateAPI.csproj",
+        "projectPath": "/Users/coreyhicks/IdeaProjects/tech_exercise/tech_exercise/api/StargateAPI.csproj",
         "packagesPath": "/Users/coreyhicks/.nuget/packages/",
-        "outputPath": "/Users/coreyhicks/IdeaProjects/tech_review/tech_exercise/api/obj/",
+        "outputPath": "/Users/coreyhicks/IdeaProjects/tech_exercise/tech_exercise/api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/coreyhicks/.nuget/NuGet/NuGet.Config"

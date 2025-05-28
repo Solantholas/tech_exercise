@@ -35,7 +35,7 @@ namespace StargateAPI.Controllers
 
             try
             {
-                var result = await _mediator.Send(new GetPersonByName { Name = name });
+                var result = await _mediator.Send(new GetAstronautDutiesByName { Name = name });
                 if (result == null)
                 {
                     _logger.LogWarning("No astronaut duties found for name: {Name}", name);
