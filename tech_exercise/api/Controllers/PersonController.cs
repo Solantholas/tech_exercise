@@ -19,12 +19,12 @@ namespace StargateAPI.Controllers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        [HttpGet("")]
+        [HttpGet]
         public async Task<IActionResult> GetPeople()
         {
             try
             {
-                var result = await _mediator.Send(new GetPeople());
+                GetPeopleResult result = await _mediator.Send(new GetPeople());
                 if (result == null)
                 {
                     _logger.LogWarning("No people found.");
@@ -66,7 +66,7 @@ namespace StargateAPI.Controllers
 
             try
             {
-                var result = await _mediator.Send(new GetPersonByName { Name = name });
+                GetPersonByNameResult result = await _mediator.Send(new GetPersonByName { Name = name });
 
                 if (result == null || !result.Success)
                 {
@@ -93,7 +93,7 @@ namespace StargateAPI.Controllers
             }
         }
 
-        [HttpPost("")]
+        [HttpPost]
         public async Task<IActionResult> CreatePerson([FromBody] string name)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -109,7 +109,7 @@ namespace StargateAPI.Controllers
 
             try
             {
-                var result = await _mediator.Send(new CreatePerson { Name = name });
+                CreatePersonResult result = await _mediator.Send(new CreatePerson { Name = name });
                 if (result == null || !result.Success)
                 {
                     _logger.LogWarning("Failed to create person: {Name}", name);
@@ -135,7 +135,7 @@ namespace StargateAPI.Controllers
             }
         }
 
-        [HttpPut("")]
+        [HttpPut]
         public async Task<IActionResult> UpdatePersonByName([FromBody] UpdatePersonRequest request)
         {
             if (string.IsNullOrWhiteSpace(request?.Name) || request.NewName == null)
@@ -151,7 +151,7 @@ namespace StargateAPI.Controllers
 
             try
             {
-                var result = await _mediator.Send(new UpdatePerson { Name = request.Name, NewName = request.NewName });
+                UpdatePersonResult result = await _mediator.Send(new UpdatePerson { Name = request.Name, NewName = request.NewName });
                 if (result == null || !result.Success)
                 {
                     _logger.LogWarning("Failed to update person: {Name}", request.Name);

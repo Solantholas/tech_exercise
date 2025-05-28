@@ -35,7 +35,7 @@ namespace StargateAPI.Controllers
 
             try
             {
-                var result = await _mediator.Send(new GetAstronautDutiesByName { Name = name });
+                GetAstronautDutiesByNameResult result = await _mediator.Send(new GetAstronautDutiesByName { Name = name });
                 if (result == null)
                 {
                     _logger.LogWarning("No astronaut duties found for name: {Name}", name);
@@ -60,7 +60,7 @@ namespace StargateAPI.Controllers
             }
         }
 
-        [HttpPost("")]
+        [HttpPost]
         public async Task<IActionResult> CreateAstronautDuty([FromBody] CreateAstronautDuty request)
         {
             if (request == null)
@@ -76,7 +76,7 @@ namespace StargateAPI.Controllers
 
             try
             {
-                var result = await _mediator.Send(request);
+                CreateAstronautDutyResult result = await _mediator.Send(request);
                 if (result == null || !result.Success)
                 {
                     _logger.LogWarning("Failed to create astronaut duty for person: {Name}", request?.Name);

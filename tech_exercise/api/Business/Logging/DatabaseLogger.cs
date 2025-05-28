@@ -29,10 +29,10 @@ public class DatabaseLogger : ILogger
             return;
         }
 
-        using var scope = _scopeFactory.CreateScope();
-        var context = scope.ServiceProvider.GetRequiredService<StargateContext>();
+        using IServiceScope scope = _scopeFactory.CreateScope();
+        StargateContext context = scope.ServiceProvider.GetRequiredService<StargateContext>();
 
-        var entry = new LogEntry
+        LogEntry entry = new LogEntry
         {
             Level = logLevel.ToString(),
             Message = formatter(state, exception),

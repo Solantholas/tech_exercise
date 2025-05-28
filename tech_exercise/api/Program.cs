@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using StargateAPI.Business.Commands;
 using StargateAPI.Business.Data;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.WebHost.ConfigureKestrel(options =>
 {
@@ -38,10 +38,10 @@ builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssemblies(typeof(Program).Assembly);
 });
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
-var loggerFactory = app.Services.GetRequiredService<ILoggerFactory>();
-var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
+ILoggerFactory loggerFactory = app.Services.GetRequiredService<ILoggerFactory>();
+IServiceScopeFactory scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
 loggerFactory.AddProvider(new DatabaseLoggerProvider(scopeFactory));
 
 if (app.Environment.IsDevelopment())
