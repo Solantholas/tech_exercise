@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tech_exercise", "tech_exercise", "{7B859F11-E3E5-58C6-23E2-DF493E0CA31C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StargateAPI", "tech_exercise\api\StargateAPI.csproj", "{E4158703-D128-71C0-CCFF-1419F0ECB31D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E4158703-D128-71C0-CCFF-1419F0ECB31D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4158703-D128-71C0-CCFF-1419F0ECB31D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4158703-D128-71C0-CCFF-1419F0ECB31D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4158703-D128-71C0-CCFF-1419F0ECB31D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E4158703-D128-71C0-CCFF-1419F0ECB31D} = {7B859F11-E3E5-58C6-23E2-DF493E0CA31C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0DD48845-DEED-4024-B7FE-A3936DD465B3}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,73 @@
+<mat-card class="card-container">
+  <mat-card-title>All Astronauts</mat-card-title>
+  <mat-card-content style="margin-top: 16px;">
+    @switch (peopleQuery.status()) {
+      @case ('pending') {
+        <mat-spinner class="loading-spinner"></mat-spinner>
+      }
+      @case ('error') {
+        <p>Error loading data: {{ peopleQuery.error()?.message }}</p>
+      }
+      @default {
+        <table mat-table [dataSource]="peopleQuery.data()?.people ?? []" class="mat-elevation-z8" *ngIf="(peopleQuery.data()?.people ?? []).length > 0">
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let person">{{ person.name }}</td>
+          </ng-container>
+
+          <!-- Current Rank Column -->
+          <ng-container matColumnDef="currentRank">
+            <th mat-header-cell *matHeaderCellDef>Current Rank</th>
+            <td mat-cell *matCellDef="let person">{{ person.currentRank | camelCase }}</td>
+          </ng-container>
+
+          <!-- Current Duty Title Column -->
+          <ng-container matColumnDef="currentDutyTitle">
+            <th mat-header-cell *matHeaderCellDef>Current Duty Title</th>
+            <td mat-cell *matCellDef="let person">{{ person.currentDutyTitle | camelCase }}</td>
+          </ng-container>
+
+          <!-- Career Start Date Column -->
+          <ng-container matColumnDef="careerStartDate">
+            <th mat-header-cell *matHeaderCellDef>Career Start Date</th>
+            <td mat-cell *matCellDef="let person">
+              {{ person.careerStartDate ? (person.careerStartDate | date:'MM/dd/yyyy') : '' }}
+            </td>
+          </ng-container>
+
+          <!-- Career End Date Column -->
+          <ng-container matColumnDef="careerEndDate">
+            <th mat-header-cell *matHeaderCellDef>Career End Date</th>
+            <td mat-cell *matCellDef="let person">
+              {{ person.careerEndDate ? (person.careerEndDate | date:'MM/dd/yyyy') : 'N/A' }}
+            </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let person">
+                <button mat-button (click)="openDetails(person)">Details</button>
+                <span
+                [matTooltip]="person.currentDutyTitle === 'RETIRED' ? 'Cannot update retired Astronauts' : ''"
+                matTooltipPosition="above"
+                >
+                <button
+                    mat-button
+                    [disabled]="person.currentDutyTitle === 'RETIRED'"
+                    (click)="goToUpdate(person)"
+                >
+                    Update
+                </button>
+                </span>
+            </td>
+        </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      }
+    }
+  </mat-card-content>
+</mat-card>

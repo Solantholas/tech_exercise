@@ -1,0 +1,46 @@
+<mat-card class="card-container">
+  <mat-card-title>Update Astronaut</mat-card-title>
+
+  <mat-card-content style="margin-top: 16px;">
+    @if (personQuery.data()) {
+      <form [formGroup]="form" (ngSubmit)="handleSubmit($event)">
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" required>
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>Current Rank</mat-label>
+          <mat-select formControlName="currentRank" required>
+            <mat-option *ngFor="let rank of astronautRanks" [value]="rank">
+              {{ rank | camelCase }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>Current Duty Title</mat-label>
+          <mat-select formControlName="currentDutyTitle" required>
+            <mat-option *ngFor="let title of astronautDutyTitles" [value]="title">
+              {{ title | camelCase }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>Career Start Date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="careerStartDate" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        
+        <mat-card-actions style="display: flex; justify-content: flex-end;">
+          <button mat-button (click)="goBack()">Cancel</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Update</button>
+        </mat-card-actions>
+      </form>
+    } @else {
+      <mat-spinner></mat-spinner>
+    }
+  </mat-card-content>
+</mat-card>

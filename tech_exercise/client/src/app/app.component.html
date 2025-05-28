@@ -1,0 +1,7 @@
+<app-drawer #drawer>
+  <app-toolbar
+    [drawerOpened]="drawer.opened"
+    (openDrawer)="drawer.opened = !drawer.opened">
+  </app-toolbar>
+  <router-outlet></router-outlet>
+</app-drawer>

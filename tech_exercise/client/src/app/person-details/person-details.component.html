@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Person Details</h2>
+<mat-dialog-content>
+    <mat-list>
+        <mat-list-item><strong>Name:</strong> {{ data.name }}</mat-list-item>
+        <mat-list-item><strong>Current Rank:</strong> {{ data.currentRank ? data.currentRank : ''| camelCase }}</mat-list-item>
+        <mat-list-item><strong>Current Duty Title:</strong> {{ data.currentDutyTitle ? data.currentDutyTitle : '' | camelCase}}</mat-list-item>
+        <mat-list-item><strong>Career Start Date:</strong> {{ data.careerStartDate ? (data.careerStartDate | date:'MM/dd/yyyy') : '' }}</mat-list-item>
+        <mat-list-item><strong>Career End Date:</strong> {{ data.careerEndDate ? (data.careerEndDate | date:'MM/dd/yyyy') : '' }}</mat-list-item>
+    </mat-list>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

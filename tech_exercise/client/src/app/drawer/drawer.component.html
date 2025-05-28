@@ -1,0 +1,11 @@
+<mat-sidenav-container class="drawer-container">
+  <mat-sidenav #drawer mode="side" [(opened)]="opened">
+    <h3 style="margin:16px;">Navigation</h3>
+    <button mat-button (click)="navigateToPeopleTable()">All People</button>
+    <button mat-button (click)="openAddPerson()">Add Person</button>
+    <button mat-button (click)="opened = false">Close</button>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
